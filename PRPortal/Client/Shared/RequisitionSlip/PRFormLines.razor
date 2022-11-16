@@ -1,0 +1,53 @@
+﻿@using PRPortal.Shared;
+@inject HttpClient httpClient
+
+<MudTable Items="@PRLines" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped">
+    <HeaderContent>
+        <MudTh><MudIconButton Icon="@Icons.Filled.AddBox" aria-label="delete" Color="Color.Primary"></MudIconButton></MudTh>
+        <MudTh>#</MudTh>
+        <MudTh style="white-space: nowrap!important;">Item Code</MudTh>
+        <MudTh style="white-space: nowrap!important;">Item Description</MudTh>
+        <MudTh style="white-space: nowrap!important;">Scope Of Work</MudTh>
+        <MudTh style="white-space: nowrap!important;">Scope Description</MudTh>
+        <MudTh style="white-space: nowrap!important;">Material Code</MudTh>
+        <MudTh style="white-space: nowrap!important;">Material Description</MudTh>
+        <MudTh style="white-space: nowrap!important;">Quantity</MudTh>
+        <MudTh style="white-space: nowrap!important;">U_InfoPrice</MudTh>
+        <MudTh style="white-space: nowrap!important;">U_UomCode</MudTh>
+        <MudTh style="white-space: nowrap!important;">U_ItemSpecification</MudTh>
+        <MudTh style="white-space: nowrap!important;">TaxCode</MudTh>
+        <MudTh style="white-space: nowrap!important;">U_OnHandQuantity</MudTh>
+        <MudTh style="white-space: nowrap!important;">U_InventoryType</MudTh>
+        <MudTh style="white-space: nowrap!important;">U_InventoryPurpose</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd></MudTd>
+        <MudTd DataLabel="Doc Entry"></MudTd>
+        <MudTd DataLabel="Item Code"></MudTd>
+        <MudTd DataLabel="Item Description"></MudTd>
+        <MudTd DataLabel="Scope Of Work"></MudTd>
+        <MudTd DataLabel="Scope Description"></MudTd>
+        <MudTd DataLabel="Material Code"></MudTd>
+        <MudTd DataLabel="Material Description"></MudTd>
+        <MudTd DataLabel="Quantity"></MudTd>
+        <MudTd DataLabel="U_InfoPrice"></MudTd>
+        <MudTd DataLabel="U_UomCode"></MudTd>
+        <MudTd DataLabel="U_ItemSpecification"></MudTd>
+        <MudTd DataLabel="TaxCode"></MudTd>
+        <MudTd DataLabel="U_OnHandQuantity"></MudTd>
+        <MudTd DataLabel="U_InventoryType"></MudTd>
+        <MudTd DataLabel="U_InventoryPurpose"></MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    [Parameter]
+    public List<PRLines> PRLines { get; set; }
+
+    // table settings
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = true;
+    private bool bordered = false;
+
+}

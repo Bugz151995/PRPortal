@@ -1,0 +1,94 @@
+﻿@page "/RequisitionSlip"
+
+@using Newtonsoft.Json;
+@using PRPortal.Client.Shared.RequisitionSlip
+@using PRPortal.Shared;
+@using System.Text;
+@inject HttpClient _httpClient;
+
+<Title PageName="Requisition Slip" Breadcrumb="_items" />
+
+<EditForm Model="@_header" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <PRFormHeader PRHeader="@_header" />
+    <PRFormLines PRLines="@_lines" />
+
+    <MudGrid Spacing="2" Justify="Justify.Center">
+        <MudItem xs="6">
+            <MudPaper Elevation="0" Class="d-flex flex-column mud-width-full py-8 px-1 gap-2">
+                <MudTextField T="string" Label="Remarks" Variant="Variant.Outlined" Text="" Lines="3" />
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="6" Class="d-flex flex-column justify-end">
+            <MudPaper Elevation="0" Class="d-flex justify-end mud-width-full py-8 px-4 gap-2">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Post</MudButton>
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">Cancel</MudButton>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+@code {
+    private PRHeader _header = new PRHeader();
+    private List<PRLines> _lines = new List<PRLines>();
+
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem> { 
+        new BreadcrumbItem("Requisition Slip", href: "RequisitionSlip", disabled: true) 
+    };
+
+    // form validation
+    bool success = false;
+    private void OnValidSubmit(EditContext context)
+    {
+        // POST Request here after the inputs are validated....
+        var content = new StringContent(JsonConvert.SerializeObject(context), Encoding.UTF8, "application/json");
+        var response = _httpClient.PostAsJsonAsync("url", content);
+
+        success = true;
+        StateHasChanged();
+    }
+
+    // get method json ang makukua,
+    protected override async Task OnInitializedAsync()
+    {
+        //Elements = await httpClient.GetFromJsonAsync<List<Element>>("dummyjson.com/products");
+
+
+        // HARD CODED DATA
+        for (int i = 0; i < 5; i++)
+        {
+            _lines.Add(new PRLines
+                {
+                    DocEntry = 1,
+                    U_ItemCode = 1,
+                    U_Dscription = 1,
+                    U_WhsCode = 1,
+                    U_BinLoc = 1,
+                    U_Scope = 1,
+                    U_ScopeDesc = 1,
+                    U_MaterialCode = 1,
+                    U_MaterialDesc = 1,
+                    U_Quantity = 1,
+                    U_InfoPrice = 1,
+                    U_UomCode = 1,
+                    U_ItemSpecification = 1,
+                    TaxCode = 1,
+                    U_OnHandQuantity = 1,
+                    U_InventoryType = 1,
+                    U_InventoryPurpose = 1
+                });
+        }
+
+    }
+
+    // TODO: posting to staging table through service layer
+    // Note: Question.. Is it possible to access the UDT in service layer or the access is limited only to standard table
+    // TODO: Code the Services and Interfaces for the http requests..
+    // TODO: Inject the Interfaces to the client side
+    // TODO: Bind values to the table or fields when executing get method request
+    // TODO: User Authentication - POST to hanaserver:50000/b1s/v1/Login and get the sessionId Response..
+    // TODO: Create Approve Requisition Slip Page
+    // TODO: Post to staging table for the approved requisition slip
+    // TODO: Responsive Design of the portal
+}
