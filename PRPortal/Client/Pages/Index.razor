@@ -1,7 +1,10 @@
 ﻿@page "/"
 
-@using System.ComponentModel.DataAnnotations
+@using System.ComponentModel.DataAnnotations;
+@using Newtonsoft.Json;
 @using PRPortal.Shared
+@using System.Text;
+@inject HttpClient _httpClient;
 
 <EditForm Model="@User" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
@@ -32,10 +35,30 @@
 
 @code {
     User User = new User();
+
     bool success;
 
-    private void OnValidSubmit(EditContext context)
+    private async void OnValidSubmit(EditContext context)
     {
+        var content = new StringContent(JsonConvert.SerializeObject(context), Encoding.UTF8, "application/json");
+        var portalLogin = await _httpClient.GetFromJsonAsync<User>($"U_FT_WPUS?$filter=U_UserName eq {context.Field("Username")}");
+
+        if (portalLogin != null)
+        {
+            //hard coded config file for SAP B1 Connection
+            var credential = new
+            {
+                CompanyDB = "TCPI_TESTDB",
+                UserName = "manager",
+                Password = "ftsi"
+            };
+
+            // authorize user get JWT token
+            // login to SAP
+            var sapLogin = _httpClient.PostAsJsonAsync("Login", credential);
+
+            // TODO: store sap session ID in cookies
+        }
         success = true;
         StateHasChanged();
     }

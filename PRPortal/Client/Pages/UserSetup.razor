@@ -89,6 +89,7 @@
 </EditForm>
 @code {
     User User = new User();
+    User _user = new User();
     List<Departments> _departments = new List<Departments>();
 
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem> {
@@ -102,11 +103,16 @@
 
     // form validation
     bool success = false;
-    private void OnValidSubmit(EditContext context)
+    private async void OnValidSubmit(EditContext context)
     {
-        // POST Request here after the inputs are validated....
         var content = new StringContent(JsonConvert.SerializeObject(context), Encoding.UTF8, "application/json");
-        var response = _httpClient.PostAsJsonAsync("U_FT_WPUS", content);
+        _user = await _httpClient.PostAsJsonAsync("U_FT_WPUS", content);
+
+        if (_user != null)
+        {
+            // authorize user get JWT token
+            var response = _httpClient.PostAsJsonAsync("Login", content);
+        }
 
         success = true;
         StateHasChanged();
