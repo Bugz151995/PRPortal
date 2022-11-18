@@ -10,16 +10,17 @@ StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configurat
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-//DO NOT REMOVE THIS PART FOR CORS POLICIES
 //THIS IS FOR ALLOWING REQUEST TO A DIFFERENT DOMAIN
+//DO NOT REMOVE THIS PART FOR CORS POLICIES NG NEW BROWSERS
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
     {
         policy.AllowAnyHeader()
-        .AllowAnyOrigin()
-        .AllowAnyHeader()
-        .AllowAnyMethod();
+        .AllowAnyMethod()
+        .WithExposedHeaders("WWW-Authenticate")
+        .WithOrigins("http://localhost:5000", "https://localhost:5001", "https://localhost")
+        .AllowCredentials();
     });
 });
 //END CORS POLICIES

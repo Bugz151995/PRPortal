@@ -20,7 +20,7 @@ namespace PRPortal.Shared
         public string? U_DocNum { get; set; }
         public string? U_Department { get; set; } // Preferred Supplier to confirm if this is the field for it
         public string? U_Branch { get; set; } // no binded field // list
-        public char? U_DocStatus { get; set; }
+        public string? U_DocStatus { get; set; }
         public DateTime? U_TaxDate { get; set; }
         public DateTime? U_ReqDate { get; set; }
         public string? U_Urgency { get; set; }

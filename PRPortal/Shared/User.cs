@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,5 +23,9 @@ namespace PRPortal.Shared
         public int U_Approver2 { get; set; }
         public int U_Approver3 { get; set; }
         public int U_Approver4 { get; set; }
+        public int U_ApproverCode1 { get; set; }
+        public int U_ApproverCode2 { get; set; }
+        public int U_ApproverCode3 { get; set; }
+        public int U_ApproverCode4 { get; set; }
     }
 }

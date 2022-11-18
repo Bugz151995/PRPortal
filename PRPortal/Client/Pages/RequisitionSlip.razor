@@ -32,7 +32,10 @@
 @code {
     private PRHeader _header = new PRHeader();
     private List<PRLines> _lines = new List<PRLines>();
-    private List<PRHeader> listPRHeader = new List<PRHeader>();
+
+    private List<Projects> _projects = new List<Projects>();
+    private List<Departments> _departments = new List<Departments>();
+    private List<Branch> _branch = new List<Branch>();
 
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem> { 
         new BreadcrumbItem("Requisition Slip", href: "RequisitionSlip", disabled: true) 
@@ -56,10 +59,13 @@
     // get method json ang makukua,
     protected override async Task OnInitializedAsync()
     {
-        listPRHeader = await _httpClient.GetFromJsonAsync<List<PRHeader>>("U_FT_OPRQ");
+        _header.U_DocStatus = "Waiting For Approval"; // Default DocStatus
+        _projects = await _httpClient.GetFromJsonAsync<List<Projects>>("Projects?$select=Code,Name");
+        _departments = await _httpClient.GetFromJsonAsync<List<Departments>>("DepartmentsService_GetDepartmentList");
+        _branch = await _httpClient.GetFromJsonAsync<List<Branch>>("BranchesService_GetBranchList");
+
         //Elements = await httpClient.GetFromJsonAsync<List<Element>>("dummyjson.com/products");
         //populate the header for autofill fields
-
     }
 
     // TODO: posting to staging table through service layer - PENDING
