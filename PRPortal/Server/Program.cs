@@ -10,6 +10,20 @@ StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configurat
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+//DO NOT REMOVE THIS PART FOR CORS POLICIES
+//THIS IS FOR ALLOWING REQUEST TO A DIFFERENT DOMAIN
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyHeader()
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+//END CORS POLICIES
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

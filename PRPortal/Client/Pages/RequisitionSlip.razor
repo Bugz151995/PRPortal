@@ -22,7 +22,7 @@
         </MudItem>
         <MudItem xs="6" Class="d-flex flex-column justify-end">
             <MudPaper Elevation="0" Class="d-flex justify-end mud-width-full py-8 px-4 gap-2">
-                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Post</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Post</MudButton>
                 <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">Cancel</MudButton>
             </MudPaper>
         </MudItem>
@@ -41,9 +41,12 @@
     bool success = false;
     private void OnValidSubmit(EditContext context)
     {
-        // POST Request here after the inputs are validated....
+        // POST Request here after the inputs are validated
+        // Consume Service Layer
         var content = new StringContent(JsonConvert.SerializeObject(context), Encoding.UTF8, "application/json");
-        var response = _httpClient.PostAsJsonAsync("url", content);
+        var response = _httpClient.PostAsJsonAsync("U_FT_OPRQ", content);
+        // TODO: fix the format of context EditContext type variable
+        // TODO: posting of lines in loop
 
         success = true;
         StateHasChanged();
@@ -53,42 +56,17 @@
     protected override async Task OnInitializedAsync()
     {
         //Elements = await httpClient.GetFromJsonAsync<List<Element>>("dummyjson.com/products");
-
-
-        // HARD CODED DATA
-        for (int i = 0; i < 5; i++)
-        {
-            _lines.Add(new PRLines
-                {
-                    DocEntry = 1,
-                    U_ItemCode = 1,
-                    U_Dscription = 1,
-                    U_WhsCode = 1,
-                    U_BinLoc = 1,
-                    U_Scope = 1,
-                    U_ScopeDesc = 1,
-                    U_MaterialCode = 1,
-                    U_MaterialDesc = 1,
-                    U_Quantity = 1,
-                    U_InfoPrice = 1,
-                    U_UomCode = 1,
-                    U_ItemSpecification = 1,
-                    TaxCode = 1,
-                    U_OnHandQuantity = 1,
-                    U_InventoryType = 1,
-                    U_InventoryPurpose = 1
-                });
-        }
+        //populate the header for autofill fields
 
     }
 
-    // TODO: posting to staging table through service layer
-    // Note: Question.. Is it possible to access the UDT in service layer or the access is limited only to standard table
-    // TODO: Code the Services and Interfaces for the http requests..
-    // TODO: Inject the Interfaces to the client side
-    // TODO: Bind values to the table or fields when executing get method request
-    // TODO: User Authentication - POST to hanaserver:50000/b1s/v1/Login and get the sessionId Response..
-    // TODO: Create Approve Requisition Slip Page
-    // TODO: Post to staging table for the approved requisition slip
-    // TODO: Responsive Design of the portal
+    // TODO: posting to staging table through service layer - PENDING
+    // TODO: Direct http call to service layer
+    // TODO: Inject the Interfaces to the client side - PENDING 
+    // TODO: Bind values to the table or fields when executing get method request - DONE
+    // TODO: User Authentication - POST to hanaserver:50000/b1s/v1/Login and get the sessionId Response.. - PENDING
+    // TODO: Create Approve Requisition Slip Page - DONE
+    // TODO: Post to staging table for the approved requisition slip - PENDING
+    // TODO: Responsive Design of the portal - PENDGIN
+    // TODO: SAP B1 Integration Services for HANA
 }
