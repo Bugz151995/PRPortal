@@ -6,13 +6,18 @@
             <MudAutocomplete T="string" Label="Project ID" @bind-Value="PRHeader.U_ProjectID" SearchFunc="@Search" Margin="Margin.Dense" Dense="false" Variant="Variant.Outlined" />
             <MudTextField @bind-Value="PRHeader.U_ProjName" Label="Project Name" Variant="Variant.Outlined" Margin="Margin.Dense" Disabled="true" />
             <MudTextField @bind-Value="PRHeader.U_Location" Label="Location" Variant="Variant.Outlined" Margin="Margin.Dense" />
-            <MudSelect Margin="Margin.Dense" T="string" Label="Supplier" Variant="Variant.Outlined">
+            <MudSelect Margin="Margin.Dense" T="string" Label="Branch" Variant="Variant.Outlined">
                 @*for loop here if there is a supplier array data*@
-                <MudSelectItem Value="@("Supplier 1")" />
-                <MudSelectItem Value="@("Supplier 2")" />
-                <MudSelectItem Value="@("Supplier 3")" />
+                <MudSelectItem Value="@("Branch 1")" />
+                <MudSelectItem Value="@("Branch 2")" />
+                <MudSelectItem Value="@("Branch 3")" />
             </MudSelect>
-            <MudTextField @bind-Value="PRHeader.U_Department" Label="Preferred Supplier" Variant="Variant.Outlined" Margin="Margin.Dense" />
+            <MudSelect Margin="Margin.Dense" T="string" Label="Department" Variant="Variant.Outlined">
+                @*for loop here if there is a supplier array data*@
+                <MudSelectItem Value="@("Department 1")" />
+                <MudSelectItem Value="@("Department 2")" />
+                <MudSelectItem Value="@("Department 3")" />
+            </MudSelect>
         </MudPaper>
     </MudItem>
     <MudItem xs="6">
