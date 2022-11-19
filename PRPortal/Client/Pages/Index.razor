@@ -40,28 +40,31 @@
 
     private async void OnValidSubmit(EditContext context)
     {
-        var content = new StringContent(JsonConvert.SerializeObject(context), Encoding.UTF8, "application/json");
-        var portalLogin = await _httpClient.GetFromJsonAsync<User>($"U_FT_WPUS?$filter=U_UserName eq {context.Field("Username")}");
 
-        if (portalLogin != null)
+        //hard coded config file for SAP B1 Connection
+        var sapCredential = new
         {
-            //hard coded config file for SAP B1 Connection
-            var credential = new
-            {
-                CompanyDB = "TCPI_TESTDB",
-                UserName = "manager",
-                Password = "ftsi"
-            };
+            CompanyDB = "TCPI_TESTDB",
+            UserName = "manager",
+            Password = "ftsi"
+        };
 
-            // authorize user get JWT token
-            // login to SAP
-            var sapLogin = _httpClient.PostAsJsonAsync("Login", credential);
+        var convertedCredential = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
 
+        // authorize user get JWT token
+        // login to SAP
+        var sapLogin = _httpClient.PostAsJsonAsync("Login", convertedCredential);
+
+        if (sapLogin != null)
+        {
+            var portalLogin = await _httpClient.GetFromJsonAsync<User>($"U_FT_WPUS?$filter=U_UserName eq {context.Field("Username")}");
+
+            Console.WriteLine(sapLogin);
+            Console.WriteLine(portalLogin);
             // TODO: store sap session ID in cookies
             // TODO: check for validation
         }
         success = true;
         StateHasChanged();
     }
-
 }
