@@ -1,9 +1,9 @@
-﻿@page "/"
-
-@using System.ComponentModel.DataAnnotations;
+﻿@using System.ComponentModel.DataAnnotations;
 @using Newtonsoft.Json;
 @using PRPortal.Shared
 @using System.Text;
+
+@page "/"
 @inject HttpClient _httpClient;
 
 <EditForm Model="@User" OnValidSubmit="OnValidSubmit">

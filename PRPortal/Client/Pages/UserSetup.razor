@@ -1,7 +1,10 @@
-﻿@page "/UserSetup";
-@using Newtonsoft.Json;
+﻿@using Newtonsoft.Json;
 @using PRPortal.Shared;
+@using Microsoft.AspNetCore.Authorization;
 @using System.Text;
+
+@page "/UserSetup";
+@attribute [Authorize];
 @inject HttpClient _httpClient;
 
 <Title PageName="User Setup" Breadcrumb="_items" />
@@ -87,10 +90,12 @@
 
 
 </EditForm>
+
 @code {
     User User = new User();
+
     User _user = new User();
-    List<Departments> _departments = new List<Departments>();
+    List<Departments>? _departments = new List<Departments>();
 
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem> {
         new BreadcrumbItem("User Setup", href: "UserSetup", disabled: true)
@@ -106,13 +111,7 @@
     private async void OnValidSubmit(EditContext context)
     {
         var content = new StringContent(JsonConvert.SerializeObject(context), Encoding.UTF8, "application/json");
-        _user = await _httpClient.PostAsJsonAsync("U_FT_WPUS", content);
-
-        if (_user != null)
-        {
-            // authorize user get JWT token
-            var response = _httpClient.PostAsJsonAsync("Login", content);
-        }
+        var response = await _httpClient.PostAsJsonAsync("U_FT_WPUS", content);
 
         success = true;
         StateHasChanged();

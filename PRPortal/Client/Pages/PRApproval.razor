@@ -1,9 +1,11 @@
-﻿@page "/DocumentStatus/PRApproval"
-
+﻿@using Microsoft.AspNetCore.Authorization;
 @using Newtonsoft.Json;
-@using PRPortal.Client.Shared.RequisitionSlip
+@using PRPortal.Client.Shared.RequisitionSlip;
 @using PRPortal.Shared;
 @using System.Text;
+
+@page "/DocumentStatus/PRApproval";
+@attribute [Authorize];
 @inject HttpClient _httpClient;
 
 <Title PageName="Requisition Slip Approval" Breadcrumb="_items" />

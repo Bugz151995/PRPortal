@@ -6,7 +6,7 @@
 
 <MudLayout>
     <AuthorizeView>
-        <NotAuthorized>
+        <Authorized>
             <MudAppBar Elevation="0" Style="@($"background:{Colors.Blue.Darken4};")">
                 <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
                 <MudSpacer />
@@ -34,9 +34,9 @@
             <MudPaper Class="d-flex justify-end pa-4" Style="@($"background:{Colors.Grey.Lighten4};")">
                 <MudLink Href="https://fasttrackph.com/" Style="font-size: small; text-align: center">Developed by Fasttrack Solutions, Inc.</MudLink>
             </MudPaper>
-        </NotAuthorized>
+        </Authorized>
 
-        <Authorized>
+        <NotAuthorized>
             <MudMainContent>
                 <MudContainer MaxWidth="MaxWidth.Large" Class="my-10">
                     @Body
@@ -46,7 +46,7 @@
                 <MudLink Href="http://www.taiheiyo-cement.com.ph/" Style="font-size: small; text-align: center">&copy; 2022 Taiheiyo Cement Philippines, Inc.</MudLink>
                 <MudLink Href="https://fasttrackph.com/" Style="font-size: small; text-align: center">Developed by Fasttrack Solutions, Inc.</MudLink>
             </MudPaper>
-        </Authorized>
+        </NotAuthorized>
     </AuthorizeView>
 </MudLayout>
 

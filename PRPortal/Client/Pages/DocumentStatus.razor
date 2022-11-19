@@ -1,9 +1,11 @@
-﻿@page "/DocumentStatus"
-
-@using System.Net.Http.Json
+﻿@using System.Net.Http.Json;
+@using Microsoft.AspNetCore.Authorization;
 @using PRPortal.Shared;
-@inject HttpClient _httpClient
-@inject NavigationManager _navigation
+
+@page "/DocumentStatus";
+@attribute [Authorize];
+@inject HttpClient _httpClient;
+@inject NavigationManager _navigation;
 
 <Title PageName="Document Status" Breadcrumb="_items" />
 
