@@ -1,8 +1,8 @@
 ﻿namespace PRPortal.Client
 {
-    public class CorsEnabledRequestDelegatingHandler : DelegatingHandler
+    public class CorsDelegatingHandler : DelegatingHandler
     {
-        public CorsEnabledRequestDelegatingHandler() : base(new HttpClientHandler())
+        public CorsDelegatingHandler() : base(new HttpClientHandler())
         {  
         }
 

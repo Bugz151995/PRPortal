@@ -51,7 +51,7 @@
 
         // authorize user get JWT token
         // login to SAP
-        var sapLogin = await _httpClient.PostAsJsonAsync("Login", JsonConvert.SerializeObject(sapCredential));
+        var sapLogin = await _httpClient.PostAsJsonAsync("Login", sapCredential);
 
         var test = context;
 
