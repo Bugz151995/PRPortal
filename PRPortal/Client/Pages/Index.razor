@@ -49,7 +49,7 @@
             Password = "ftsi"
         };
 
-        var content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "text/plain");
+        var content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
         // authorize user get JWT token
         // login to SAP
         var sapLogin = await _httpClient.PostAsync("Login", content);
