@@ -49,21 +49,20 @@
             Password = "ftsi"
         };
 
-        var convertedCredential = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
-
         // authorize user get JWT token
         // login to SAP
-        var sapLogin = _httpClient.PostAsJsonAsync("Login", convertedCredential);
+        var sapLogin = await _httpClient.PostAsJsonAsync("Login", JsonConvert.SerializeObject(sapCredential));
 
-        if (sapLogin != null)
-        {
-            var portalLogin = await _httpClient.GetFromJsonAsync<User>($"U_FT_WPUS?$filter=U_UserName eq {context.Field("Username")}");
+        var test = context;
 
-            Console.WriteLine(sapLogin);
-            Console.WriteLine(portalLogin);
-            // TODO: store sap session ID in cookies
-            // TODO: check for validation
-        }
+        //if (sapLogin != null)
+        //{
+        //    //var portalLogin = await _httpClient.GetFromJsonAsync<User>($"U_FT_WPUS?$filter=U_UserName eq {context.Field("Username")}");
+
+        //    Console.WriteLine(portalLogin);
+        //    // TODO: store sap session ID in cookies
+        //    // TODO: check for validation
+        //}
         success = true;
         StateHasChanged();
     }

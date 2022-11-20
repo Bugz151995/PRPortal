@@ -19,8 +19,7 @@ builder.Services.AddCors(opt =>
     {
         policy.AllowAnyHeader()
         .AllowAnyMethod()
-        .WithExposedHeaders("WWW-Authenticate")
-        .WithOrigins("http://172.31.24.203:50000", "https://172.31.24.203:50000", "https://localhost", "http://localhost:5001", , "https://localhost:5000")
+        .AllowAnyOrigin()
         .AllowCredentials();
     });
 });
