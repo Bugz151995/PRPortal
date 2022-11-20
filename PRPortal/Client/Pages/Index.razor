@@ -17,7 +17,7 @@
                 </div>
                 <MudCardContent>
                     <MudTextField Label="Username" HelperText=""
-                                  @bind-Value="User.U_UserName" For="@(() => User.U_UserName)" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Person" AdornmentColor="Color.Primary" Variant="Variant.Outlined"/>
+                                  @bind-Value="User.U_UserName" For="@(() => User.U_UserName)" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Person" AdornmentColor="Color.Primary" Variant="Variant.Outlined" />
                     <MudTextField Label="Password" HelperText="" Class="mt-3"
                                   @bind-Value="User.U_Password" For="@(() => User.U_Password)" InputType="InputType.Password" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Lock" AdornmentColor="Color.Primary" Variant="Variant.Outlined" />
                     <MudPaper Elevation="0" Class="d-flex justify-end">
@@ -51,6 +51,7 @@
 
         // authorize user get JWT token
         // login to SAP
+        _httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "https://172.31.24.203");
         var sapLogin = await _httpClient.PostAsJsonAsync("Login", JsonConvert.SerializeObject(sapCredential));
 
         var test = context;
