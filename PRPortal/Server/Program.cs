@@ -13,15 +13,12 @@ builder.Services.AddRazorPages();
 
 //THIS IS FOR ALLOWING REQUEST TO A DIFFERENT DOMAIN
 //DO NOT REMOVE THIS PART FOR CORS POLICIES NG NEW BROWSERS
-builder.Services.AddCors(opt =>
+builder.Services.AddCors(options =>
 {
-    opt.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin()
-        .AllowCredentials();
-    });
+    options.AddPolicy(name: "MyPolicy",
+        policy => {
+            policy.WithOrigins("http://172.31.24.203", "https://172.31.24.203");
+        });
 });
 //END CORS POLICIES
 
