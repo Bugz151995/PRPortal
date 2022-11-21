@@ -50,6 +50,18 @@ else
     app.UseHsts();
 }
 
+// PROXY TEST
+// for CORS request avoiding preflight
+app.MapWhen(
+    context => context.Request.Path.StartsWithSegments("/b1s/v1"),
+    builder => builder.RunProxy(new ProxyOptions
+    {
+        Scheme = "https",
+        Host = "172.31.24.203",
+        Port = "50000",
+    })
+);
+
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
