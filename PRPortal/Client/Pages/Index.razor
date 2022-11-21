@@ -55,8 +55,8 @@
         if (sapLogin.IsSuccessStatusCode)
         {
             var session = await sapLogin.Content.ReadFromJsonAsync<Session>();
-            Console.WriteLine(session.ToString());
-            Console.WriteLine(context.ToString());
+            Console.WriteLine(session.SessionId);
+            Console.WriteLine(context.Field("U_UserName"));
         }
 
         success = true;
