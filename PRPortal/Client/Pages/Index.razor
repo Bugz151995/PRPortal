@@ -67,6 +67,7 @@
         request.Headers.Add("Access-Control-Allow-Origin", "*");
         request.Headers.Add("Allow", "GET, POST, HEAD, OPTIONS");
         request.Content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
+
         HttpResponseMessage sapLogin = await _httpClient.SendAsync(request);
 
         var test = context;
