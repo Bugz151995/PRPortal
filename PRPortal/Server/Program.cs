@@ -23,7 +23,15 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://172.31.24.203", 
                 "https://172.31.24.203", 
                 "http://172.31.24.203:50000", 
-                "https://172.31.24.203:50000");
+                "https://172.31.24.203:50000",
+                "http://localhost",
+                "https://localhost",
+                "http://localhost:5000",
+                "https://localhost:5001"
+                )
+            .WithExposedHeaders("WWW-Authenticate")
+            .AllowAnyMethod()
+            .AllowCredentials();
         });
 });
 //END CORS POLICIES
