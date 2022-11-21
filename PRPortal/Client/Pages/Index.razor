@@ -63,7 +63,6 @@
 
         //using var sapLogin = await _httpClient.PostAsJsonAsync("/b1s/v1/Login", sapCredential);
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/b1s/v1/Login");
-        request.Headers.Add("Content-Type", "application/json");
         request.Headers.Add("Access-Control-Allow-Origin", "*");
         request.Headers.Add("Allow", "GET, POST, HEAD, OPTIONS");
         request.Content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
