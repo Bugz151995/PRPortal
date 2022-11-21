@@ -56,7 +56,7 @@
         {
             var session = await sapLogin.Content.ReadFromJsonAsync<Session>();
             Console.WriteLine(session.SessionId);
-            Console.WriteLine(context.Field("U_UserName"));
+            Console.WriteLine(context.Model.ToString());
         }
 
         success = true;
