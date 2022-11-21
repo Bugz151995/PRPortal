@@ -62,11 +62,12 @@
         //_httpClient.DefaultRequestHeaders.Add("Access-Control-Expose-Headers", "*");
 
         //using var sapLogin = await _httpClient.PostAsJsonAsync("/b1s/v1/Login", sapCredential);
-        var request = new HttpRequestMessage(HttpMethod.Post, "/b1s/v1/Login");
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/b1s/v1/Login");
         request.Headers.Add("Content-Type", "application/json;charset=UTF-8");
         request.Headers.Add("Access-Control-Allow-Origin", "*");
         request.Headers.Add("Allow", "GET, POST, HEAD, OPTIONS");
-        using HttpResponseMessage sapLogin = await _httpClient.SendAsync(request);
+        request.Content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
+        HttpResponseMessage sapLogin = await _httpClient.SendAsync(request);
 
         var test = context;
 
