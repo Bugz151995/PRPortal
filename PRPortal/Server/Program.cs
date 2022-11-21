@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Net.Http.Headers;
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
 // Add services to the container.
-
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
@@ -15,9 +17,13 @@ builder.Services.AddRazorPages();
 //DO NOT REMOVE THIS PART FOR CORS POLICIES NG NEW BROWSERS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "MyPolicy",
-        policy => {
-            policy.WithOrigins("http://172.31.24.203", "https://172.31.24.203");
+    options.AddPolicy(MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://172.31.24.203", 
+                "https://172.31.24.203", 
+                "http://172.31.24.203:50000", 
+                "https://172.31.24.203:50000");
         });
 });
 //END CORS POLICIES
@@ -42,7 +48,7 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseCors();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.MapRazorPages();
 app.MapControllers();
