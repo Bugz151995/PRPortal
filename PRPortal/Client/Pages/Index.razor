@@ -49,30 +49,9 @@
             Password = "ftsi"
         };
 
-        // TODO: create simple request to avoid preflighting..
+        HttpContent content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
+        using var sapLogin = await _httpClient.PostAsync("/b1s/v1/Login", content);
 
-        // authorize user get JWT token
-        // login to SAP
-        //_httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json;charset=UTF-8");
-        //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
-        //_httpClient.DefaultRequestHeaders.Add("Allow", "GET, POST, HEAD, OPTIONS");
-        //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Methods", "*");
-        //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Credentials", "true");
-        //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Headers", "*");
-        //_httpClient.DefaultRequestHeaders.Add("Access-Control-Expose-Headers", "*");
-
-        using var sapLogin = await _httpClient.PostAsJsonAsync("/b1s/v1/Login", sapCredential);
-
-        var test = context;
-
-        //if (sapLogin != null)
-        //{
-        //    //var portalLogin = await _httpClient.GetFromJsonAsync<User>($"U_FT_WPUS?$filter=U_UserName eq {context.Field("Username")}");
-
-        //    Console.WriteLine(portalLogin);
-        //    // TODO: store sap session ID in cookies
-        //    // TODO: check for validation
-        //}
         success = true;
         StateHasChanged();
     }
