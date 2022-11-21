@@ -53,21 +53,14 @@
 
         // authorize user get JWT token
         // login to SAP
-        //_httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json;charset=UTF-8");
-        //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
-        //_httpClient.DefaultRequestHeaders.Add("Allow", "GET, POST, HEAD, OPTIONS");
+        _httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
+        _httpClient.DefaultRequestHeaders.Add("Allow", "POST");
         //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Methods", "*");
         //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Credentials", "true");
         //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Headers", "*");
         //_httpClient.DefaultRequestHeaders.Add("Access-Control-Expose-Headers", "*");
 
-        //using var sapLogin = await _httpClient.PostAsJsonAsync("/b1s/v1/Login", sapCredential);
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/b1s/v1/Login");
-        request.Headers.Add("Access-Control-Allow-Origin", "*");
-        request.Content.Headers.Add("Allow", "GET, POST, HEAD, OPTIONS");
-        request.Content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
-
-        HttpResponseMessage sapLogin = await _httpClient.SendAsync(request);
+        using var sapLogin = await _httpClient.PostAsJsonAsync("/b1s/v1/Login", sapCredential);
 
         var test = context;
 
