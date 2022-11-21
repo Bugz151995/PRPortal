@@ -53,6 +53,7 @@
 
         // authorize user get JWT token
         // login to SAP
+        _httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json;charset=UTF-8");
         _httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
         _httpClient.DefaultRequestHeaders.Add("Allow", "GET, POST, HEAD, OPTIONS");
         //_httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Methods", "*");
