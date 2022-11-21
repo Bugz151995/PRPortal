@@ -17,9 +17,9 @@
             <MudGrid Spacing="3" Justify="Justify.Center">
                 <MudItem xs="6">
                     <MudPaper Elevation="0" Class="d-flex flex-column mud-width-full py-8 px-1 gap-2">
-                        <MudTextField Elevation="0" @bind-Value="User.U_EmployeeName" Label="User Code" Variant="Variant.Outlined" Margin="Margin.Dense" disable="true" />
+                        <MudTextField Elevation="0" @bind-Value="User.U_Employee" Label="User Code" Variant="Variant.Outlined" Margin="Margin.Dense" disable="true" />
                         <MudTextField Elevation="0" @bind-Value="User.U_Password" Label="Password" Variant="Variant.Outlined" Margin="Margin.Dense" />
-                        <MudTextField Elevation="0" @bind-Value="User.U_EmployeeName" Label="Employee Name" Variant="Variant.Outlined" Margin="Margin.Dense" disable="true" />
+                        <MudTextField Elevation="0" @bind-Value="User.U_Employee" Label="Employee Name" Variant="Variant.Outlined" Margin="Margin.Dense" disable="true" />
                         <MudSelect Margin="Margin.Dense" T="string" Label="Department" Variant="Variant.Outlined">
                             <MudSelectItem Value="@("")" />
                             <MudSelectItem Value="@("Requestor")" />
