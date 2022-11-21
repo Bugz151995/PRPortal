@@ -36,6 +36,8 @@ builder.Services.AddCors(options =>
 });
 //END CORS POLICIES
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,6 +52,14 @@ else
     app.UseHsts();
 }
 
+app.UseHttpsRedirection();
+
+app.UseBlazorFrameworkFiles();
+app.UseStaticFiles();
+
+app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
+
 // PROXY TEST
 // for CORS request avoiding preflight
 app.MapWhen(
@@ -61,14 +71,6 @@ app.MapWhen(
         Port = "50000",
     })
 );
-
-app.UseHttpsRedirection();
-
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
-
-app.UseRouting();
-app.UseCors(MyAllowSpecificOrigins);
 
 app.MapRazorPages();
 app.MapControllers();
