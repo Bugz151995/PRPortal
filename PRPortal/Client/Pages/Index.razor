@@ -42,7 +42,7 @@
     {
 
         //hard coded config file for SAP B1 Connection
-        var sapCredential = new
+        SapCompanyDB sapCredential = new SapCompanyDB
         {
             CompanyDB = "TCPI_TESTDB",
             UserName = "manager",
@@ -51,6 +51,13 @@
 
         HttpContent content = new StringContent(JsonConvert.SerializeObject(sapCredential), Encoding.UTF8, "application/json");
         using var sapLogin = await _httpClient.PostAsync("/b1s/v1/Login", content);
+
+        if (sapLogin.IsSuccessStatusCode)
+        {
+            var session = await sapLogin.Content.ReadFromJsonAsync<SapCompanyDB>();
+            Console.WriteLine(session);
+            Console.WriteLine(context);
+        }
 
         success = true;
         StateHasChanged();

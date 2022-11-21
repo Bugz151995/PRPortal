@@ -9,11 +9,12 @@ namespace PRPortal.Shared
 {
     public class User
     {
-        public int U_ID { get; set; }
-        public string U_UserCode { get; set; }
-        public string U_EmployeeName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public string U_UserName { get; set; }
         public string U_Password { get; set; }
+        public int U_UserId { get; set; }
+        public string U_Employee { get; set; }
         public string U_EmailAddress { get; set; }
         public string U_Role { get; set; }
         public string U_ApprovalLevel { get; set; }
