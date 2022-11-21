@@ -55,6 +55,10 @@
         // login to SAP
         _httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
         _httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Methods", "*");
+        _httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Credentials", "true");
+        _httpClient.DefaultRequestHeaders.Add("Access-Control-Allow-Headers", "*");
+        _httpClient.DefaultRequestHeaders.Add("Access-Control-Expose-Headers", "*");
+
         using var sapLogin = await _httpClient.PostAsJsonAsync("/b1s/v1/Login", sapCredential);
 
         var test = context;
