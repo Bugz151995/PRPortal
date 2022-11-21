@@ -42,7 +42,7 @@
     {
 
         //hard coded config file for SAP B1 Connection
-        SapCompanyDB sapCredential = new SapCompanyDB
+        var sapCredential = new
         {
             CompanyDB = "TCPI_TESTDB",
             UserName = "manager",
@@ -54,9 +54,9 @@
 
         if (sapLogin.IsSuccessStatusCode)
         {
-            var session = await sapLogin.Content.ReadFromJsonAsync<SapCompanyDB>();
-            Console.WriteLine(session);
-            Console.WriteLine(context);
+            var session = await sapLogin.Content.ReadFromJsonAsync<Session>();
+            Console.WriteLine(session.ToString());
+            Console.WriteLine(context.ToString());
         }
 
         success = true;
