@@ -8,7 +8,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient(new CorsDelegatingHandler()) { BaseAddress = new Uri("http://172.31.24.203:50001") });
+builder.Services.AddScoped(sp => new HttpClient{ BaseAddress = new Uri("http://172.31.24.203:50001") });
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddAuthorizationCore();
